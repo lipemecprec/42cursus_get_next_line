@@ -2,14 +2,17 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
-
-char *get_next_line(int fd);
+#include "get_next_line.h"
 
 int	main(void)
 {
 	int fd;
-
+	int i = 0;
 	fd = open("dummy.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	return 0;
+	// while (i < 2)
+	{
+		printf("\nNa main > %s", get_next_line(fd));
+		i++;
+	}
+	return (0);
 }

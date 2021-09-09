@@ -1,10 +1,21 @@
-SRCS = get_next_line.c	get_next_line_utils.c	main.c
+all: get_next_line.c get_next_line_utils.c libgnl.a
+	@gcc get_next_line.c get_next_line_utils.c main.c -L . get_next_line.h -D BUFFER_SIZE=42 -o gnl
 
-all: fclean
-	gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 ${SRCS}
+gnl.o: get_next_line.c
+	@gcc -c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=42
+
+libgnl.a: gnl.o
+	@ar rcs libgnl.a get_next_line.o
+
+clean:
+	@rm -f get_next_line.o get_next_line_utils.o
+
+fclean: clean
+	@rm -f get_next_line.a gnl
+
+re: fclean all
 
 run: fclean all
-	./a.out
+	./gnl
 
-fclean:
-	rm -rf *.o *.a
+.PHONY: all clean fclean re run
