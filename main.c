@@ -8,10 +8,15 @@ int	main(void)
 {
 	int fd;
 	int i = 0;
+	char *line;
+
 	fd = open("dummy.txt", O_RDONLY);
-	// while (i < 2)
+	while (i < 3)
 	{
-		printf("\nNa main > %s", get_next_line(fd));
+		line = get_next_line(fd);
+		printf("\nNa main > %s", line);
+		free(line);
+		printf("-------------------------------------------\n");
 		i++;
 	}
 	return (0);
