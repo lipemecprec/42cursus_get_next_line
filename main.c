@@ -11,10 +11,10 @@ int	main(void)
 	char *line;
 
 	fd = open("dummy.txt", O_RDONLY);
-	while (i < 3)
+	while (i < 11)
 	{
 		line = get_next_line(fd);
-		printf("\nNa main > %s", line);
+		printf("RETURN > %s", line);
 		free(line);
 		printf("-------------------------------------------\n");
 		i++;

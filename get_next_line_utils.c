@@ -6,11 +6,25 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:06:10 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/11 17:41:02 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/12 11:26:37 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	unsigned char	*str;
+
+	str = (unsigned char *)s;
+	while (n > 0)
+	{
+		n--;
+		str[n] = (unsigned char)c;
+	}
+	return (s);
+}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -21,7 +35,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	arr = malloc(nmemb * size);
 	if (!arr)
 		return (NULL);
-	// ft_bzero(arr, nmemb * size);
+	ft_memset(arr, '\0', nmemb * size);
 	return (arr);
 }
 
@@ -60,27 +74,27 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (i);
 }
 
-ssize_t	isline(char *buf, ssize_t size)
+ssize_t	isline(char *buf)
 {
 	ssize_t	i;
 
 	i = 0;
-	while (buf && buf[i] != '\n' && buf[i] != '\0' && i <= size)
+	while (buf[i] != '\n' && buf[i] != '\0')
 		i++;
-	if (buf[i] == '\n' || i != size)
-		return (i);
+	if (buf[i] == '\n')
+		return (i + 1);
 	return (-1);
 }
 
-size_t  ft_strlcat(char *dst, char *src, size_t dstsize, char end_char)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t  i;
-	size_t  dst_len;
-	size_t  src_len;
-	size_t  res;
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	res;
 
-	dst_len = isline(dst, dstsize);
-	src_len = isline(src, dstsize);
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
 	i = 0;
 	if (dstsize > dst_len)
 	{
@@ -91,39 +105,13 @@ size_t  ft_strlcat(char *dst, char *src, size_t dstsize, char end_char)
 			i++;
 			dst_len++;
 		}
-		dst[dst_len] = end_char;
-		dst[dst_len + 1] = '\0';
+		dst[dst_len] = '\0';
 		return (res);
 	}
 	else
 		return (src_len + dstsize);
 }
 
-void	*ft_realloc(void *src, size_t size)
-{
-	unsigned char	*dest;
-	unsigned char	*srcc;
-	size_t			i;
-	size_t			len;
-
-	if (size < 1)
-	{
-		free(src);
-		return (NULL);
-	}
-	dest = (char *)malloc(sizeof(char) * size);
-	if (!dest)
-		return (NULL);
-	srcc = (unsigned char *)src;
-	i = 0;
-	while (i < size && src)
-	{
-		dest[i] = srcc[i];
-		i++;
-	}
-	free (src);
-	return (dest);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

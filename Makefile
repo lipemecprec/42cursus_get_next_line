@@ -1,8 +1,10 @@
+SIZE = 1
+
 all: get_next_line.c get_next_line_utils.c libgnl.a
-	@gcc get_next_line.c get_next_line_utils.c main.c -L . get_next_line.h -D BUFFER_SIZE=42 -o gnl
+	@gcc get_next_line.c get_next_line_utils.c main.c -L . get_next_line.h -D BUFFER_SIZE=${SIZE} -o gnl
 
 gnl.o: get_next_line.c
-	@gcc -c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=42
+	@gcc -c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=${SIZE}
 
 libgnl.a: gnl.o
 	@ar rcs libgnl.a get_next_line.o
