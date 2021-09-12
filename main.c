@@ -11,11 +11,12 @@ int	main(void)
 	char *line;
 
 	fd = open("dummy.txt", O_RDONLY);
-	while (i < 11)
+	while (i < 2)
 	{
 		line = get_next_line(fd);
 		printf("RETURN > %s", line);
 		free(line);
+		line = NULL;
 		printf("-------------------------------------------\n");
 		i++;
 	}

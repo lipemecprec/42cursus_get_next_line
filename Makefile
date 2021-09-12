@@ -1,4 +1,4 @@
-SIZE = 1
+SIZE = 8
 
 all: get_next_line.c get_next_line_utils.c libgnl.a
 	@gcc get_next_line.c get_next_line_utils.c main.c -L . get_next_line.h -D BUFFER_SIZE=${SIZE} -o gnl

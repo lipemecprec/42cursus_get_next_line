@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:55:29 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/12 11:26:56 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/12 15:59:37 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	*ft_calloc(size_t nmemb, size_t size);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	*ft_memset(void *s, int c, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
