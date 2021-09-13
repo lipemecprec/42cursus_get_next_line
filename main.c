@@ -11,7 +11,7 @@ int	main(void)
 	char *line;
 
 	fd = open("dummy.txt", O_RDONLY);
-	while (i < 2)
+	while (i < 11)
 	{
 		line = get_next_line(fd);
 		printf("RETURN > %s", line);

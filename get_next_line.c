@@ -6,52 +6,83 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/12 17:52:31 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/12 20:59:20 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line);
+char	*get_line(char **static_buf, char **line);
 
 char *get_next_line(int fd)
 {
 	static char	*static_buf = 0;
 	char		*temp_buf;
 	char		*line;
-	char		*f_read;
 	ssize_t 	len;
 
 	if (0 >= fd || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = NULL;
-	while(1)
+	temp_buf = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+	if (!temp_buf)
+		return (NULL);
+	if (read(fd, temp_buf, 0) < 0)
 	{
-		if (static_buf == NULL)
-		{
-			f_read = (char *)ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
-			read(fd, f_read, BUFFER_SIZE);
-			f_read[BUFFER_SIZE] = '\0';
-			temp_buf = ft_strjoin(temp_buf, f_read);
-			free(f_read);
-		}
-		else
-		{
-			temp_buf = ft_substr(static_buf, 0, BUFFER_SIZE);
-			free(static_buf);
-			static_buf = NULL;
-		}
-		len = isline(temp_buf);
-		if(len >= 0)
-		{
-			line = ft_substr(temp_buf, 0, len);
-			static_buf = ft_substr(temp_buf, len, BUFFER_SIZE - len);
-			free(temp_buf);
-			return (line);
-		}
+		free(temp_buf);
+		return (NULL);
 	}
+	if (static_buf == NULL)
+		static_buf = ft_strdup("");
+	len = read_line(fd, &temp_buf, &static_buf, &line);
+	if(line == NULL && len == 0)
+		return NULL;
+	return (line);
 }
 
-// ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line)
-// {
+ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line)
+{
+	// char	*temp;
+	ssize_t	len;
 
-// }
+	len = 1;
+	while ((ft_strchr(*temp_buf, '\n') == NULL) && (len > 0))
+	{
+		len = read(fd, *temp_buf, BUFFER_SIZE);
+		(*temp_buf)[len] = '\0';
+		// temp = *static_buf;
+		// *static_buf = ft_strjoin(temp, *temp_buf);
+		*static_buf = ft_strjoin(*static_buf, *temp_buf);
+		// free(temp);
+	}
+	free(*temp_buf);
+	*temp_buf = NULL;
+	*static_buf = get_line(static_buf, line);
+	if (**line == '\0')
+	{
+		free (*line);
+		*line = NULL;
+	}
+	return (len);
+}
+
+char	*get_line(char **static_buf, char **line)
+{
+	size_t	i;
+	char	*next_buf;
+
+	i = 0;
+	next_buf = NULL;
+	while ((*(*static_buf + i) != '\n') && (*(*static_buf + i) != '\0'))
+		i++;
+	if ((*static_buf)[i] == '\n')
+	{
+		i++;
+		*line = ft_substr(*static_buf, 0, i);
+		next_buf = ft_strdup(&(*static_buf)[i]);
+	}
+	else
+		*line = ft_strdup(*static_buf);
+	free(*static_buf);
+	*static_buf = NULL;
+	return (next_buf);
+}

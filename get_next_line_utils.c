@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:06:10 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/12 16:25:05 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/12 21:04:18 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*arr;
 
-	if (nmemb * size < 0)
-		return (NULL);
+	// if ((nmemb * size) < 0)
+	// 	return (NULL);
 	arr = malloc(nmemb * size);
 	if (!arr)
 		return (NULL);
@@ -63,6 +63,24 @@ size_t	ft_strlen(const char *s)
 		i++;
 	}
 	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if ((unsigned char)s[i] == (unsigned char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (c == '\0')
+	{
+		return ((char *)&s[i]);
+	}
+	return (NULL);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -150,4 +168,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_strlcpy(join, s1, s1len + 1);
 	ft_strlcat(join, s2, (s1len + s2len + 1));
 	return (join);
+}
+
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	char	*dup;
+
+	len = ft_strlen(s) + 1;
+	dup = (char *)malloc(sizeof(char) * len);
+	if (dup == NULL)
+		return (NULL);
+	ft_strlcpy(dup, s, len);
+	return (dup);
 }
