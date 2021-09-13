@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/12 20:59:20 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/12 21:27:25 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char *get_next_line(int fd)
 
 ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line)
 {
-	// char	*temp;
+	char	*temp;
 	ssize_t	len;
 
 	len = 1;
@@ -49,10 +49,9 @@ ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line)
 	{
 		len = read(fd, *temp_buf, BUFFER_SIZE);
 		(*temp_buf)[len] = '\0';
-		// temp = *static_buf;
-		// *static_buf = ft_strjoin(temp, *temp_buf);
-		*static_buf = ft_strjoin(*static_buf, *temp_buf);
-		// free(temp);
+		temp = *static_buf;
+		*static_buf = ft_strjoin(temp, *temp_buf);
+		free(temp);
 	}
 	free(*temp_buf);
 	*temp_buf = NULL;
