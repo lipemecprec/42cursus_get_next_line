@@ -6,20 +6,21 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/17 23:49:57 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/18 00:58:58 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
 ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line);
 char	*get_line(char **static_buf, char **line);
 
 char	*get_next_line(int fd)
 {
-	char	*static_buf[FOPEN_MAX] = { NULL };
-	char	*temp_buf;
-	char	*line;
-	ssize_t	len;
+	static char	*static_buf[FOPEN_MAX] = {NULL};
+	char		*temp_buf;
+	char		*line;
+	ssize_t		len;
 
 	if (0 >= fd || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -35,7 +36,7 @@ char	*get_next_line(int fd)
 		static_buf[fd] = ft_strdup("");
 	len = read_line(fd, &temp_buf, &static_buf[fd], &line);
 	if (!line && len == 0)
-		return NULL;
+		return (NULL);
 	return (line);
 }
 

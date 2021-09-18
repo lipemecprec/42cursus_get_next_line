@@ -6,11 +6,12 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/14 20:35:47 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/18 01:00:05 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
 ssize_t	read_line(int fd, char **temp_buf, char **static_buf, char **line);
 char	*get_line(char **static_buf, char **line);
 
@@ -35,7 +36,7 @@ char	*get_next_line(int fd)
 		static_buf = ft_strdup("");
 	len = read_line(fd, &temp_buf, &static_buf, &line);
 	if (!line && len == 0)
-		return NULL;
+		return (NULL);
 	return (line);
 }
 
