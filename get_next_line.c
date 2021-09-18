@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/18 01:00:05 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/18 16:12:55 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		len;
 
-	if (0 >= fd || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	temp_buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp_buf)
