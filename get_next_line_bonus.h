@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:55:29 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/17 23:56:01 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/18 16:52:38 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define GET_NEXT_LINE_BONUS_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <sys/types.h>
 
 /* \brief *get_net_line returns a line read from a file descriptor
 \param fd file description
