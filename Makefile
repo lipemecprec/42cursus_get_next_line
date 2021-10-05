@@ -21,6 +21,10 @@ re: fclean all
 run: fclean all
 	./gnl
 
+debug: fclean
+	${CC} ${FLAGS} -lbsd -g -Og -std=c99 -pedantic -Wconversion -g3 -DDEBUG get_next_line.c get_next_line_utils.c main.c -L . get_next_line.h -D BUFFER_SIZE=${SIZE} -o debug && ./debug
+	valgrind --leak-check=full --show-reachable=yes --track-origins=yes -s ./debug
+
 bonus:
 	@rm -f *.o *.a *.out
 	@gcc -c get_next_line_bonus.c get_next_line_utils_bonus.c -D BUFFER_SIZE=${SIZE}

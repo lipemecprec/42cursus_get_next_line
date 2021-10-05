@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:55:29 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/18 16:52:38 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:43:09 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 \param fd file description
 \return read line, or NULL for EOF or error. */
 char		*get_next_line(int fd);
-ssize_t		read_line(int fd, char **temp_buf, char **static_buf, char **line);
-char		*get_line(char **static_buf, char **line);
 /* \brief The strchr() function
 \return a pointer to the first occurrence of the character c in the string s.*/
 char		*ft_strchr(const char *s, int c);
