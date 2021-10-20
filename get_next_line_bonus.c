@@ -6,7 +6,7 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:54:16 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/20 22:03:49 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:57:39 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ static ssize_t	read_line(int fd, char **temp_buf, char **st_buf, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*st_buf[1024] = {NULL};
+	static char	*st_buf[OPEN_MAX] = {NULL};
 	char		*temp_buf;
 	char		*line;
 	ssize_t		len;
 
-	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	temp_buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp_buf)

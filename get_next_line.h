@@ -6,9 +6,17 @@
 /*   By: faguilar <faguilar@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 21:55:29 by faguilar          #+#    #+#             */
-/*   Updated: 2021/09/20 19:34:32 by faguilar         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:57:12 by faguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef OPEN_MAX
+# define OPEN_MAX 256
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 32
+#endif
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
